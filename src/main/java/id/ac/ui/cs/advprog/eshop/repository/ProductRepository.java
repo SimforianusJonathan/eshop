@@ -10,13 +10,30 @@ import java.util.List;
 @Repository
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
+    private long dummyId = 1L;
 
     public Product create(Product product) {
+
+        // if product id is still not exist
+        if (product.getProductID() == null || product.getProductID().isEmpty()) {
+            product.setProductID(String.valueOf(dummyId++));
+        }
+
         productData.add(product);
         return product;
     }
 
     public Iterator<Product> findAll() {
         return productData.iterator();
+    }
+
+    public Product update(Product product) {
+        for (int i = 0; i < productData.size(); i++) {
+            if (productData.get(i).getProductID().equals(product.getProductID())) {
+                productData.set(i, product);
+                return product;
+            }
+        }
+        return null; // product not found
     }
 }
