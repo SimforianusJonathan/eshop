@@ -54,11 +54,18 @@ public class ProductController {
                 product.setProductName(updatedProduct.getProductName());
                 product.setProductQuantity(updatedProduct.getProductQuantity());
                 
-                service.update(product); // Update the product
-                return "redirect:/product/list"; // Redirect after product editting
+                service.update(product);
+                return "redirect:/product/list";
             }
         }
         return "redirect:/product/list"; // Product not found
     }
+
+    @PostMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable("id") String id) {
+        service.delete(id);
+        return "redirect:/product/list";
+    }
+
 
 }
