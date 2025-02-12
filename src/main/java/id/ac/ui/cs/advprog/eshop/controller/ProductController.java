@@ -5,8 +5,10 @@ import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -24,7 +26,11 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public String createProductPost(@ModelAttribute Product product, Model model) {
+    public String createProductPost(@Valid @ModelAttribute Product product, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            // If there are validation errors, return to the form with error messages
+            return "createProduct";
+        }
         service.create(product);
         return "redirect:list";
     }
@@ -48,7 +54,11 @@ public class ProductController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateProduct(@PathVariable("id") String id, @ModelAttribute("product") Product updatedProduct) {
+    public String updateProduct(@PathVariable("id") String id, @Valid @ModelAttribute("product") Product updatedProduct, BindingResult bindingResult) {
+            if (bindingResult.hasErrors()) {
+                // If there are validation errors, return to the edit form with error messages
+                return "editProduct";
+            }
         for (Product product : service.findAll()) {
             if (product.getProductID().equals(id)) {
                 product.setProductName(updatedProduct.getProductName());
