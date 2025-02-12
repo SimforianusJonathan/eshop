@@ -20,7 +20,6 @@
 <div class="container">
     <h3>Edit Product</h3>
 
-
     <form th:action="@{/product/edit/{id}(id=${product.productID})}" th:object="${product}" method="post">
         <input type="hidden" th:field="*{productID}" />
 
