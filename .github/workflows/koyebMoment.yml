@@ -1,0 +1,21 @@
+
+name: Deploy to Koyeb
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Koyeb
+        run: |
+          curl -X POST "https://app.koyeb.com/v1/apps/eshopToken/deployments" \
+          -H "Authorization: Bearer ${{ secrets.KOYEB_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{}'
