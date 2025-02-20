@@ -45,7 +45,7 @@ class ProductControllerTest {
                         .flashAttr("product", sample))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:list"))
-                .andExpect(redirectedUrl("list"));;
+                .andExpect(redirectedUrl("list"));
     }
 
     @Test
