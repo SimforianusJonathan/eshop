@@ -8,9 +8,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class EshopApplicationTests {
-    @Test
-    void contextLoads() {}
-    
+
     @Test
     void testMainMethodCallsSpringApplicationRun() {
         try (MockedStatic<SpringApplication> mockedStatic = mockStatic(SpringApplication.class)) {
