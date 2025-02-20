@@ -60,7 +60,15 @@ public class ProductController {
             // If there are validation errors, return to the edit form with error messages
             return "editProduct";
         }
-        service.update(updatedProduct);
+        for (Product product : service.findAll()) {
+            if (product.getProductID().equals(id)) {
+                product.setProductName(updatedProduct.getProductName());
+                product.setProductQuantity(updatedProduct.getProductQuantity());
+
+                service.update(product);
+                return REDIRECT_PRODUCT_LIST;
+            }
+        }
         return REDIRECT_PRODUCT_LIST; // Product not found
     }
 

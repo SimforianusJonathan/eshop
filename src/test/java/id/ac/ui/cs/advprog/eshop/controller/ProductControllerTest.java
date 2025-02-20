@@ -144,6 +144,21 @@ class ProductControllerTest {
     }
 
     @Test
+    void testUpdateProductNotFound() throws Exception {
+        List<Product> mockProducts = getListExampleProducts(); // List without the given ID
+
+        // Ensure service.findAll() returns a list that does NOT contain the specified product ID
+        Mockito.when(productService.findAll()).thenReturn(mockProducts);
+
+        mockMvc.perform(post("/product/edit/nonexistent-id")
+                        .param("productName", "New Name")
+                        .param("productQuantity", "100"))
+                .andExpect(status().is3xxRedirection()) // Should still redirect
+                .andExpect(view().name("redirect:/product/list"))
+                .andExpect(redirectedUrl("/product/list"));
+    }
+
+    @Test
     void testUpdateProductFailed() throws Exception {
         List<Product> mockProducts = getListExampleProducts();
 
