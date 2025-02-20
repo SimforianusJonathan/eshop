@@ -11,6 +11,7 @@ sonar {
         property("sonar.projectKey", "SimforianusJonathan_eshop")
         property("sonar.organization", "simforianusjonathan270805")
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
 
@@ -86,7 +87,8 @@ tasks.test {
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
     reports{
-        xml.required =true
+        xml.required = true
+        csv.required = false
         html.required =true
     }
 }
