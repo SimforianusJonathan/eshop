@@ -96,6 +96,23 @@ class ProductRepositoryTest {
         product.setProductID("id-testing");
         product.setProductName("Not Product");
         product.setProductQuantity(103);
+        productRepository.create(product);
+
+        Product otherProduct = new Product();
+        otherProduct.setProductID("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        otherProduct.setProductName("Sampo Cap Bambang versi 2");
+        otherProduct.setProductQuantity(150);
+
+        Product result = productRepository.update(otherProduct);
+        assertNull(result);
+    }
+
+    @Test
+    void testUpdateEmptyListProduct() {
+        Product product = new Product();
+        product.setProductID("id-testing");
+        product.setProductName("Not Product");
+        product.setProductQuantity(103);
 
         Product result = productRepository.update(product);
         assertNull(result);

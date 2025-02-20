@@ -55,19 +55,11 @@ public class ProductController {
 
     @PostMapping("/edit/{id}")
     public String updateProduct(@PathVariable("id") String id, @Valid @ModelAttribute("product") Product updatedProduct, BindingResult bindingResult) {
-            if (bindingResult.hasErrors()) {
-                // If there are validation errors, return to the edit form with error messages
-                return "editProduct";
-            }
-        for (Product product : service.findAll()) {
-            if (product.getProductID().equals(id)) {
-                product.setProductName(updatedProduct.getProductName());
-                product.setProductQuantity(updatedProduct.getProductQuantity());
-                
-                service.update(product);
-                return "redirect:/product/list";
-            }
+        if (bindingResult.hasErrors()) {
+            // If there are validation errors, return to the edit form with error messages
+            return "editProduct";
         }
+        service.update(updatedProduct);
         return "redirect:/product/list"; // Product not found
     }
 
