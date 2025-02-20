@@ -1,21 +1,21 @@
 name: SonarQube
 on:
-  push:  # Runs on push to any branch
-  pull_request:
-    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - "**" # Runs on push to any branch
 jobs:
-  build:
+  sonarcloud:
     name: Build and analyze
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Required for proper SonarCloud analysis
+          fetch-depth: 0
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
           java-version: 21
-          distribution: 'temurin'  # Using Eclipse Temurin JDK 21
+          distribution: 'temurin'
       - name: Cache SonarQube packages
         uses: actions/cache@v4
         with:
