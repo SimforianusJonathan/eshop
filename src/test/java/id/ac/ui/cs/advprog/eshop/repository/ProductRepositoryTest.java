@@ -18,6 +18,7 @@ class ProductRepositoryTest {
     @InjectMocks
     ProductRepository productRepository;
 
+    // different setup for each unit test
     @BeforeEach
     void setUp() {
     }
