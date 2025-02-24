@@ -3,6 +3,7 @@ package id.ac.ui.cs.advprog.eshop.controller;
 import java.util.ArrayList;
 import java.util.List;
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.service.CarService;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,6 +26,12 @@ class ProductControllerTest {
 
     @MockBean
     private ProductService productService;
+
+    @MockBean
+    private CarController carController;
+
+    @MockBean
+    private CarService carService;
 
     // simulate sending http request "get" to '/' (ensure http response code 200)
     @Test
