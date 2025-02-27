@@ -16,9 +16,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car create(Car car) {
-        if (car == null) {
-            throw new IllegalArgumentException("Car object not detected");
-        }
+        // TODO Auto-generated method Stub
         carRepository.create(car);
         return car;
     }
@@ -39,23 +37,13 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void update(String carId, Car car) {
-        if (carId == null || carId.isEmpty() || car == null) {
-            throw new IllegalArgumentException("Car ID not detected or Car object not detected");
-        }
-        if (carRepository.findById(carId) == null) {
-            throw new IllegalArgumentException("Car with ID " + carId + " not exists");
-        }
+        // TODO Auto-generated method Stub
         carRepository.update(carId, car);
     }
 
     @Override
     public void deleteCarById(String carId) {
-        if (carId == null || carId.isEmpty()) {
-            throw new IllegalArgumentException("Car ID not detected");
-        }
-        if (carRepository.findById(carId) == null) {
-            throw new IllegalArgumentException("Car with ID " + carId + " not exists");
-        }
+        // TODO Auto-generated method Stub
         carRepository.delete(carId);
     }
 }

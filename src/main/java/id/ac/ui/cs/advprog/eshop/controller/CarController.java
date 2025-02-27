@@ -2,9 +2,11 @@ package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Car;
 import id.ac.ui.cs.advprog.eshop.service.CarServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,10 @@ class CarController  {
     }
 
     @PostMapping("/createCar")
-    public String createCarPost(@ModelAttribute Car car, Model model) {
+    public String createCarPost(@Valid @ModelAttribute Car car, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "createCar";
+        }
         carservice.create(car);
         return "redirect:listCar";
     }
@@ -44,8 +49,11 @@ class CarController  {
     }
 
     @PostMapping("/editCar")
-    public String editCarPost(@ModelAttribute Car car, Model model) {
+    public String editCarPost(@Valid @ModelAttribute Car car, BindingResult bindingResult, Model model) {
         System.out.println(car.getCarId());
+        if (bindingResult.hasErrors()) {
+            return "editCar";
+        }
         carservice.update(car.getCarId(), car);
 
         return "redirect:listCar";
