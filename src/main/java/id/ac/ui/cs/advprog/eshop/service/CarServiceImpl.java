@@ -19,6 +19,7 @@ public class CarServiceImpl implements CarService {
         if (car == null) {
             throw new IllegalArgumentException("Car object not detected");
         }
+        validateCarAttribute(car);
         carRepository.create(car);
         return car;
     }
@@ -33,18 +34,18 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car findById(String carId) {
-        Car car = carRepository.findById(carId);
-        return car;
+        return carRepository.findById(carId);
     }
 
     @Override
     public void update(String carId, Car car) {
-        if (carId == null || carId.isEmpty() || car == null) {
+        if (car == null ||carId == null || carId.isEmpty()) {
             throw new IllegalArgumentException("Car ID not detected or Car object not detected");
         }
         if (carRepository.findById(carId) == null) {
             throw new IllegalArgumentException("Car with ID " + carId + " not exists");
         }
+        validateCarAttribute(car);
         carRepository.update(carId, car);
     }
 
@@ -57,6 +58,15 @@ public class CarServiceImpl implements CarService {
             throw new IllegalArgumentException("Car with ID " + carId + " not exists");
         }
         carRepository.delete(carId);
+    }
+
+    private void validateCarAttribute(Car car) {
+        if(car.getCarName() == null || car.getCarName().trim().isEmpty() || car.getCarColor() == null || car.getCarColor().trim().isEmpty()){
+            throw new IllegalArgumentException("Car name or color not detected");
+        }
+        if (car.getCarQuantity() <=0 ){
+            throw new IllegalArgumentException("Car quantity should be positive integer");
+        }
     }
 }
 
