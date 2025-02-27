@@ -8,4 +8,12 @@ public class Car {
     private String carName;
     private String carColor;
     private int carQuantity;
+
+    public void update(Car newCarData) {
+        if (newCarData != null) {
+            this.carName = newCarData.getCarName();
+            this.carColor = newCarData.getCarColor();
+            this.carQuantity = newCarData.getCarQuantity();
+        }
+    }
 }
