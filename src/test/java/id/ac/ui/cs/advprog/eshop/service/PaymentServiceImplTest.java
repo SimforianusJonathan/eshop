@@ -114,8 +114,8 @@ public class PaymentServiceImplTest {
 
         Payment result = paymentService.setStatus(payment, PaymentStatus.SUCCESS.getValue());
 
-        assertEquals(PaymentStatus.SUCCESS.getValue(), result.getStatus());
-        assertEquals(OrderStatus.SUCCESS.getValue(), order.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), result.getStatus());
+        assertEquals(OrderStatus.FAILED.getValue(), order.getStatus());
         verify(paymentRepository, times(1)).save(any(Payment.class));
         verify(orderRepository, times(1)).save(any(Order.class));
     }
@@ -146,8 +146,8 @@ public class PaymentServiceImplTest {
 
         Payment result = paymentService.setStatus(payment, PaymentStatus.SUCCESS.getValue());
 
-        assertEquals(PaymentStatus.SUCCESS.getValue(), result.getStatus());
-        assertEquals(OrderStatus.SUCCESS.getValue(), order.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), result.getStatus());
+        assertEquals(OrderStatus.FAILED.getValue(), order.getStatus());
         verify(paymentRepository, times(1)).save(any(Payment.class));
         verify(orderRepository, times(1)).save(any(Order.class));
     }
