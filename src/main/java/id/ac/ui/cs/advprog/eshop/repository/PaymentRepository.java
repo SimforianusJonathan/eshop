@@ -10,15 +10,30 @@ import java.util.List;
 public class PaymentRepository {
     private List<Payment> paymentData = new ArrayList<>();
 
-    public Payment save(Payment payment) {
-        return null;
+    public void save(Payment payment) {
+        int i = 0;
+        for (Payment savedPayment : paymentData) {
+            if (savedPayment.getId().equals(payment.getId())) {
+                paymentData.remove(i);
+                paymentData.add(i, payment);
+                return;
+            }
+            i += 1;
+        }
+
+        paymentData.add(payment);
     }
 
     public Payment findById(String id) {
+        for (Payment savedpayment : paymentData) {
+            if (savedpayment.getId().equals(id)) {
+                return savedpayment;
+            }
+        }
         return null;
     }
 
     public List<Payment> findAll() {
-        return null;
+        return new ArrayList<>(paymentData);
     }
 }
