@@ -1,32 +1,55 @@
 package id.ac.ui.cs.advprog.eshop.service;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
+import id.ac.ui.cs.advprog.eshop.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import id.ac.ui.cs.advprog.eshop.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private PaymentRepository paymentRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public Payment addPayment(Order order, String method, Map<String, String> paymentData){
+        Payment oldPayment = paymentRepository.findById(order.getId());
+        if (oldPayment == null || oldPayment.getStatus().equals("REJECTED")) {
+            Payment payment = new Payment(order.getId(), method, "SUCCESS", paymentData);
+            paymentRepository.save(payment);
+            return payment;
+        }
         return null;
     }
     @Override
     public Payment setStatus(Payment payment, String status){
-        return null;
+        Payment oldPayment = paymentRepository.findById(payment.getId());
+        if (oldPayment == null) {
+            throw new NoSuchElementException();
+        }
+        oldPayment.setStatus(status);
+        paymentRepository.save(oldPayment);
+        Order order = orderRepository.findById(payment.getId());
+        if (order == null) {
+            throw new NoSuchElementException();
+        }
+        order.setStatus(status.equals("REJECTED") ? "FAILED" : "SUCCESS");
+        orderRepository.save(order);
+        return oldPayment;
     }
+
     @Override
     public Payment getPayment(String paymentId){
-        return null;
+        return paymentRepository.findById(paymentId);
     }
     @Override
     public List<Payment> getAllPayments(){
-        return null;
+        return paymentRepository.findAll();
     }
 }
