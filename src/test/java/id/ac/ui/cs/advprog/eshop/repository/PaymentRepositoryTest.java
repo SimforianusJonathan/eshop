@@ -39,8 +39,8 @@ public class PaymentRepositoryTest {
         Payment foundPayment = paymentRepository.findById("13652556-012a-4c07-b546-54eb1396d79b");
         assertNotNull(foundPayment);
         assertEquals("13652556-012a-4c07-b546-54eb1396d79b", foundPayment.getId());
-        assertEquals("BANK_TRANSFER", foundPayment.getMethod());
-        assertEquals("SUCCESS", foundPayment.getStatus());
+        assertEquals(PaymentMethod.BANK_TRANSFER.getValue(), foundPayment.getMethod());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), foundPayment.getStatus());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class PaymentRepositoryTest {
 
         Payment findResult = paymentRepository.findById("23652556-012a-4c07-b546-54eb1396d79b");
         assertNotNull(findResult);
-        assertEquals("REJECTED", findResult.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), findResult.getStatus());
     }
 
     @Test
