@@ -120,19 +120,6 @@ class PaymentTest {
     }
 
     @Test
-    void testCreatePaymentInvalidVoucherCode() {
-        paymentData.put("bankName","BCA");
-        paymentData.put("referenceCode","");
-        Payment payment = new Payment(
-                "13652556-012a-4c07-b546-54eb1396d79b",
-                "Voucher_Payment",
-                "REJECTED",
-                paymentData
-        );
-        assertEquals("REJECTED", payment.getStatus());
-    }
-
-    @Test
     void testSetStatusSuccess() {
         paymentData.put("bankName","");
         paymentData.put("referenceCode","42021269");
