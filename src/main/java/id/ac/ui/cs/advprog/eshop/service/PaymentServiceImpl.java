@@ -1,4 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.service;
+import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import id.ac.ui.cs.advprog.eshop.repository.OrderRepository;
@@ -20,8 +22,8 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment addPayment(Order order, String method, Map<String, String> paymentData){
         Payment oldPayment = paymentRepository.findById(order.getId());
-        if (oldPayment == null || oldPayment.getStatus().equals("REJECTED")) {
-            Payment payment = new Payment(order.getId(), method, "SUCCESS", paymentData);
+        if (oldPayment == null || oldPayment.getStatus().equals(PaymentStatus.REJECTED.getValue())) {
+            Payment payment = new Payment(order.getId(), method, PaymentStatus.SUCCESS.getValue(), paymentData);
             paymentRepository.save(payment);
             return payment;
         }
@@ -39,7 +41,7 @@ public class PaymentServiceImpl implements PaymentService {
         if (order == null) {
             throw new NoSuchElementException();
         }
-        order.setStatus(status.equals("REJECTED") ? "FAILED" : "SUCCESS");
+        order.setStatus(status.equals(PaymentStatus.REJECTED.getValue()) ? OrderStatus.FAILED.getValue() : PaymentStatus.SUCCESS.getValue());
         orderRepository.save(order);
         return oldPayment;
     }
