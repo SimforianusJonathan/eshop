@@ -157,7 +157,6 @@ public class PaymentServiceImplTest {
     void testsetStatusInvalidStatus() {
         Payment payment = payments.get(0);
         doReturn(payment).when(paymentRepository).findById(payment.getId());
-        doReturn(payment).when(paymentRepository).save(any(Payment.class));
 
         assertThrows(IllegalArgumentException.class, () -> paymentService.setStatus(payment, "LODONISASI"));
 
