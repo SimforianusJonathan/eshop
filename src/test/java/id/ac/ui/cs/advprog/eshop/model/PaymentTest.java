@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +24,7 @@ class PaymentTest {
             Payment payment = new Payment(
                     "13652556-012a-4c07-b546-54eb1396d79b",
                     "Instalment",
-                    "SUCCESS",
+                    PaymentStatus.SUCCESS.getValue(),
                     paymentData
             );
         });
@@ -36,10 +37,10 @@ class PaymentTest {
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
                 "Bank_Transfer",
-                "SUCCESS",
+                PaymentStatus.SUCCESS.getValue(),
                 paymentData
         );
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
@@ -48,10 +49,10 @@ class PaymentTest {
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
                 "Voucher_Payment",
-                "SUCCESS",
+                PaymentStatus.SUCCESS.getValue(),
                 paymentData
         );
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
@@ -88,10 +89,10 @@ class PaymentTest {
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
                 "Bank_Transfer",
-                "REJECTED",
+                PaymentStatus.REJECTED.getValue(),
                 paymentData
         );
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -101,10 +102,10 @@ class PaymentTest {
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
                 "Bank_Transfer",
-                "REJECTED",
+                PaymentStatus.REJECTED.getValue(),
                 paymentData
         );
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -113,10 +114,10 @@ class PaymentTest {
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
                 "Voucher_Payment",
-                "REJECTED",
+                PaymentStatus.REJECTED.getValue(),
                 paymentData
         );
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -126,11 +127,11 @@ class PaymentTest {
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
                 "Bank_Transfer",
-                "REJECTED",
+                PaymentStatus.REJECTED.getValue(),
                 paymentData
         );
-        payment.setStatus("SUCCESS");
-        assertEquals("SUCCESS", payment.getStatus());
+        payment.setStatus(PaymentStatus.SUCCESS.getValue());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
@@ -140,11 +141,11 @@ class PaymentTest {
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
                 "Bank_Transfer",
-                "SUCCESS",
+                PaymentStatus.SUCCESS.getValue(),
                 paymentData
         );
-        payment.setStatus("REJECTED");
-        assertEquals("REJECTED", payment.getStatus());
+        payment.setStatus(PaymentStatus.REJECTED.getValue());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -153,7 +154,7 @@ class PaymentTest {
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
                 "Voucher_Payment",
-                "SUCCESS",
+                PaymentStatus.SUCCESS.getValue(),
                 paymentData
         );
         assertThrows(IllegalArgumentException.class, () -> payment.setStatus("LODONISASI"));
