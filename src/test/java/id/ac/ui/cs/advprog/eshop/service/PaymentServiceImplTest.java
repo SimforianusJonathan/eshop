@@ -54,6 +54,7 @@ public class PaymentServiceImplTest {
         order = new Order("13652556-012a-4c07-b546-54eb139d679b",
                 products, 1708560000L, "Safira Sudrajat");
 
+        payments = new ArrayList<>();
         Payment payment1 = new Payment("13652556-012a-4c07-b546-54eb1396d79b", PaymentMethod.VOUCHER_PAYMENT.getValue(), PaymentStatus.SUCCESS.getValue(), validVoucherData);
         payments.add(payment1);
         Payment payment2 = new Payment("13652556-012a-4c07-b546-54eb1396d79c", PaymentMethod.VOUCHER_PAYMENT.getValue(), PaymentStatus.REJECTED.getValue(), invalidVoucherData);
