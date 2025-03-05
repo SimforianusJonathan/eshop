@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ class PaymentTest {
         paymentData.put("referenceCode","42021269");
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
-                "Bank_Transfer",
+                PaymentMethod.BANK_TRANSFER.getValue(),
                 PaymentStatus.SUCCESS.getValue(),
                 paymentData
         );
@@ -48,7 +49,7 @@ class PaymentTest {
         paymentData.put("voucherCode","ESHOP1234ABC5678");
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
-                "Voucher_Payment",
+                PaymentMethod.VOUCHER_PAYMENT.getValue(),
                 PaymentStatus.SUCCESS.getValue(),
                 paymentData
         );
@@ -62,7 +63,7 @@ class PaymentTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(
                     "13652556-012a-4c07-b546-54eb1396d79b",
-                    "Bank_Transfer",
+                    PaymentMethod.BANK_TRANSFER.getValue(),
                     "LODON_BESAR",
                     paymentData
             );
@@ -75,7 +76,7 @@ class PaymentTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(
                     "13652556-012a-4c07-b546-54eb1396d79b",
-                    "Bank_Transfer",
+                    PaymentMethod.BANK_TRANSFER.getValue(),
                     "LODON_KECIL",
                     paymentData
             );
@@ -88,7 +89,7 @@ class PaymentTest {
         paymentData.put("referenceCode","42021269");
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
-                "Bank_Transfer",
+                PaymentMethod.BANK_TRANSFER.getValue(),
                 PaymentStatus.REJECTED.getValue(),
                 paymentData
         );
@@ -101,7 +102,7 @@ class PaymentTest {
         paymentData.put("referenceCode","");
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
-                "Bank_Transfer",
+                PaymentMethod.BANK_TRANSFER.getValue(),
                 PaymentStatus.REJECTED.getValue(),
                 paymentData
         );
@@ -113,7 +114,7 @@ class PaymentTest {
         paymentData.put("voucherCode","270805");
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
-                "Voucher_Payment",
+                PaymentMethod.VOUCHER_PAYMENT.getValue(),
                 PaymentStatus.REJECTED.getValue(),
                 paymentData
         );
@@ -126,7 +127,7 @@ class PaymentTest {
         paymentData.put("referenceCode","42021269");
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
-                "Bank_Transfer",
+                PaymentMethod.BANK_TRANSFER.getValue(),
                 PaymentStatus.REJECTED.getValue(),
                 paymentData
         );
@@ -140,7 +141,7 @@ class PaymentTest {
         paymentData.put("referenceCode","42021269");
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
-                "Bank_Transfer",
+                PaymentMethod.BANK_TRANSFER.getValue(),
                 PaymentStatus.SUCCESS.getValue(),
                 paymentData
         );
@@ -153,7 +154,7 @@ class PaymentTest {
         paymentData.put("voucherCode","ESHOP1234ABC5678");
         Payment payment = new Payment(
                 "13652556-012a-4c07-b546-54eb1396d79b",
-                "Voucher_Payment",
+                PaymentMethod.VOUCHER_PAYMENT.getValue(),
                 PaymentStatus.SUCCESS.getValue(),
                 paymentData
         );
