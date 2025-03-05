@@ -41,9 +41,9 @@ public class PaymentServiceImplTest {
         products.add(product1);
 
         Map<String, String> validVoucherData = new HashMap<>();
-        validVoucherData.put("voucherCode", "DISKON2024");
+        validVoucherData.put("voucherCode", "ESHOP1234ABC5678");
         Map<String, String> invalidVoucherData = new HashMap<>();
-        invalidVoucherData.put("voucherCode", "ESHOP1234ABC5678");
+        invalidVoucherData.put("voucherCode", "DISKON2024");
         Map<String, String> validBankData = new HashMap<>();
         validBankData.put("bankName","BCA");
         validBankData.put("referenceCode","42069212");
@@ -113,7 +113,7 @@ public class PaymentServiceImplTest {
         doReturn(order).when(orderRepository).findById(payment.getId());
         doReturn(order).when(orderRepository).save(order);
 
-        Payment result = paymentService.setStatus(payment, PaymentStatus.SUCCESS.getValue());
+        Payment result = paymentService.setStatus(payment, PaymentStatus.REJECTED.getValue());
 
         assertEquals(PaymentStatus.REJECTED.getValue(), result.getStatus());
         assertEquals(OrderStatus.FAILED.getValue(), order.getStatus());
@@ -145,7 +145,7 @@ public class PaymentServiceImplTest {
         doReturn(order).when(orderRepository).findById(payment.getId());
         doReturn(order).when(orderRepository).save(order);
 
-        Payment result = paymentService.setStatus(payment, PaymentStatus.SUCCESS.getValue());
+        Payment result = paymentService.setStatus(payment, PaymentStatus.REJECTED.getValue());
 
         assertEquals(PaymentStatus.REJECTED.getValue(), result.getStatus());
         assertEquals(OrderStatus.FAILED.getValue(), order.getStatus());
@@ -157,6 +157,7 @@ public class PaymentServiceImplTest {
     void testsetStatusInvalidStatus() {
         Payment payment = payments.get(0);
         doReturn(payment).when(paymentRepository).findById(payment.getId());
+        doReturn(payment).when(paymentRepository).save(any(Payment.class));
 
         assertThrows(IllegalArgumentException.class, () -> paymentService.setStatus(payment, "LODONISASI"));
 
