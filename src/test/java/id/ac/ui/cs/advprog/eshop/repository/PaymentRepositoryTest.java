@@ -1,5 +1,4 @@
 package id.ac.ui.cs.advprog.eshop.repository;
-
 import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
@@ -47,9 +46,10 @@ public class PaymentRepositoryTest {
     @Test
     void testSaveUpdate() {
         Payment firstPayment = listPaymentData.get(1);
-        Payment updatedPayment = new Payment("23652556-012a-4c07-b546-54eb1396d79b", PaymentMethod.VOUCHER_PAYMENT.getValue(), PaymentStatus.REJECTED.getValue(), paymentData2);
+        Payment updatedPayment = new Payment("23652556-012a-4c07-b546-54eb1396d79b", PaymentMethod.VOUCHER_PAYMENT.getValue(), PaymentStatus.REJECTED.getValue(), firstPayment.getPaymentData());
+        paymentRepository.save(updatedPayment);
 
-        Payment findResult = paymentRepository.findById("23652556-012a-4c07-b546-54eb1396d79b2");
+        Payment findResult = paymentRepository.findById("23652556-012a-4c07-b546-54eb1396d79b");
         assertNotNull(findResult);
         assertEquals("REJECTED", findResult.getStatus());
     }
@@ -83,7 +83,7 @@ public class PaymentRepositoryTest {
             paymentRepository.save(order);
         }
 
-        List<Payment> paymentList = listPaymentData.findAll();
+        List<Payment> paymentList = paymentRepository.findAll();
         assertEquals(2, paymentList.size());
     }
 
