@@ -20,7 +20,7 @@ class PaymentBankTransferTest {
     void testInvalidEmptyPaymentData() {
         PaymentBankTransfer payment = new PaymentBankTransfer("13652556-012a-4c07-b546-54eb1396d79b", "BANK_TRANSFER", this.paymentData);
         payment.setValidateStatus(this.paymentData);
-        assertEquals("REJECTED, payment.getStatus());
+        assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
