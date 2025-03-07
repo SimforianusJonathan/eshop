@@ -59,7 +59,7 @@ class PaymentVoucherTest {
 
     @Test
     void testVoucherCodeValid(){
-        this.paymentData.put("voucherCode", "ESHOP12345678abcd");
+        this.paymentData.put("voucherCode", "ESHOP12345678abc");
         PaymentVoucher payment = new PaymentVoucher("13652556-012a-4c07-b546-54eb1396d78b", "VOUCHER_PAYMENT", this.paymentData);
         assertEquals("SUCCESS", payment.getStatus());
     }
