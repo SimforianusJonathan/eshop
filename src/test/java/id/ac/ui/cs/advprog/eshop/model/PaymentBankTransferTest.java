@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PaymentBankTransferTest {
     private Map<String, String> paymentData;
@@ -20,9 +21,8 @@ class PaymentBankTransferTest {
 
     @Test
     void testInvalidEmptyPaymentData() {
-        PaymentBankTransfer payment = new PaymentBankTransfer("13652556-012a-4c07-b546-54eb1396d79b", PaymentMethod.BANK_TRANSFER.getValue(), this.paymentData);
-        payment.setValidateStatus(this.paymentData);
-        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertThrows(IllegalArgumentException.class, () ->
+                new PaymentBankTransfer("13652556-012a-4c07-b546-54eb1396d79b", PaymentMethod.BANK_TRANSFER.getValue(), this.paymentData));
     }
 
     @Test
